@@ -1,0 +1,30 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*.override.tf
+*.override.tf.json
+.terraform/
+.terraform.lock.hcl
+
+# Local .terraform directories
+**/.terraform/*
+
+# VS Code settings
+.vscode/
+.vscode/*
+
+# IntelliJ IDEA settings
+.idea/
+.idea/*
+
+# Ignore MacOS system files
+.DS_Store
+
+# Ignore log files
+*.log
