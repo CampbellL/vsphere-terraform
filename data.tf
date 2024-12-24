@@ -46,3 +46,8 @@ data "vsphere_network" "vm_management" {
   name          = "VM Management"
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
+
+data "vsphere_virtual_machine" "rhel9_gold" {
+  name          = "templ.rhel9.gold"
+  datacenter_id = data.vsphere_datacenter.datacenter.id
+}
