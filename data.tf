@@ -1,20 +1,20 @@
 data "vsphere_datacenter" "datacenter" {
-    name = "dc-homelab"
+  name = "dc-homelab"
 }
 
 data "vsphere_datastore" "host_datastore" {
-    name          = "lancehead.physical.ssd.crucial.vmfs.esxi"
-    datacenter_id = data.vsphere_datacenter.datacenter.id
+  name          = "lancehead.physical.ssd.crucial.vmfs.esxi"
+  datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
 data "vsphere_datastore" "fast_datastore" {
-    name          = "lancehead.physical.ssd.crucial.vmfs.vms"
-    datacenter_id = data.vsphere_datacenter.datacenter.id
+  name          = "lancehead.physical.ssd.crucial.vmfs.vms"
+  datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
 data "vsphere_datastore" "mirrored_datastore" {
-    name          = "lancehead.virtual.hdd.perc.vmfs.vms"
-    datacenter_id = data.vsphere_datacenter.datacenter.id
+  name          = "lancehead.virtual.hdd.perc.vmfs.vms"
+  datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
 data "vsphere_resource_pool" "pool" {
