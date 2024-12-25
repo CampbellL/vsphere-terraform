@@ -1,0 +1,67 @@
+image:
+  name: hashicorp/terraform:latest
+  entrypoint: [""]
+
+variables:
+  PLAN: plan.cache
+  PLAN_JSON: plan.json
+  TF_ROOT: ${CI_PROJECT_DIR}
+  TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/vsphere-terraform
+
+before_script:
+  - apk --no-cache add jq
+  - alias convert_report="jq -r '([.resource_changes[]?.change.actions?]|flatten)|{\"create\":(map(select(.==\"create\"))|length),\"update\":(map(select(.==\"update\"))|length),\"delete\":(map(select(.==\"delete\"))|length)}'"
+  - echo ${TERRAFORM_TFVARS} | base64 -d > ${TF_ROOT}/terraform.tfvars
+  - cd ${TF_ROOT}
+  - terraform --version
+  - terraform init
+    -backend-config="address=${TF_ADDRESS}"
+    -backend-config="lock_address=${TF_ADDRESS}/lock"
+    -backend-config="unlock_address=${TF_ADDRESS}/lock"
+    -backend-config="username=gitlab-ci-token"
+    -backend-config="password=${CI_JOB_TOKEN}"
+    -backend-config="lock_method=POST"
+    -backend-config="unlock_method=DELETE"
+    -backend-config="retry_wait_min=5"
+
+stages:
+  - validate
+  - plan
+  - apply
+
+format:
+  stage: validate
+  script:
+    - terraform fmt -check
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+
+validate:
+  stage: validate
+  script:
+    - terraform validate
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+
+plan:
+  stage: plan
+  script:
+    - terraform plan -out=$PLAN
+    - terraform show -json $PLAN | convert_report > $PLAN_JSON
+  artifacts:
+    paths:
+      - $PLAN
+    reports:
+      terraform: $PLAN_JSON
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+
+apply:
+  stage: apply
+  script:
+    - terraform apply -auto-approve $PLAN
+  dependencies:
+    - plan
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
