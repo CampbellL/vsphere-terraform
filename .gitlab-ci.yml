@@ -59,9 +59,8 @@ plan:
 apply:
   stage: apply
   script:
+    - terraform plan -out=$PLAN
     - terraform apply -auto-approve $PLAN
-  dependencies:
-    - plan
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
