@@ -98,7 +98,7 @@ resource "vsphere_virtual_machine" "rhel9_gitlab_gitlab_runner01" {
 }
 
 resource "vsphere_virtual_machine" "rhel9_gitlab_gitlab_runner02" {
-  name             = "prd.rhel9.gitlab-runner-01"
+  name             = "prd.rhel9.gitlab-runner-02"
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.mirrored_datastore.id
   num_cpus         = 2
