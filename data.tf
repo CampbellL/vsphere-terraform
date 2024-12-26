@@ -7,6 +7,11 @@ data "vsphere_datastore" "host_datastore" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
+data "vsphere_datastore" "iso_datastore" {
+  name          = "lancehead.nas.truenas.nfs3.iso"
+  datacenter_id = data.vsphere_datacenter.datacenter.id
+}
+
 data "vsphere_datastore" "fast_datastore" {
   name          = "lancehead.physical.ssd.crucial.vmfs.vms"
   datacenter_id = data.vsphere_datacenter.datacenter.id
