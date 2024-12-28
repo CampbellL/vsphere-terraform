@@ -1,5 +1,5 @@
 resource "vsphere_virtual_machine" "rhel9_k3s_master01" {
-  name             = "prd.rhel9.k3s-01"
+  name             = "prd.rhel9.k3s-master-01"
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.mirrored_datastore.id
   num_cpus         = 2
@@ -31,7 +31,7 @@ resource "vsphere_virtual_machine" "rhel9_k3s_master01" {
 }
 
 resource "vsphere_virtual_machine" "rhel9_k3s_master02" {
-  name             = "prd.rhel9.k3s-02"
+  name             = "prd.rhel9.k3s-master-02"
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.mirrored_datastore.id
   num_cpus         = 2
@@ -62,7 +62,7 @@ resource "vsphere_virtual_machine" "rhel9_k3s_master02" {
   }
 }
 resource "vsphere_virtual_machine" "rhel9_k3s_master03" {
-  name             = "prd.rhel9.k3s-03"
+  name             = "prd.rhel9.k3s-master-03"
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.mirrored_datastore.id
   num_cpus         = 2
@@ -94,7 +94,7 @@ resource "vsphere_virtual_machine" "rhel9_k3s_master03" {
 }
 
 resource "vsphere_virtual_machine" "rhel9_k3s_worker01" {
-  name             = "prd.rhel9.k3s-04"
+  name             = "prd.rhel9.k3s-worker-01"
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.mirrored_datastore.id
   num_cpus         = 2
@@ -126,7 +126,7 @@ resource "vsphere_virtual_machine" "rhel9_k3s_worker01" {
 }
 
 resource "vsphere_virtual_machine" "rhel9_k3s_worker02" {
-  name             = "prd.rhel9.k3s-05"
+  name             = "prd.rhel9.k3s-worker-02"
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.mirrored_datastore.id
   num_cpus         = 2
@@ -158,7 +158,7 @@ resource "vsphere_virtual_machine" "rhel9_k3s_worker02" {
 }
 
 resource "vsphere_virtual_machine" "rhel9_k3s_worker03" {
-  name             = "prd.rhel9.k3s-05"
+  name             = "prd.rhel9.k3s-worker-03"
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.mirrored_datastore.id
   num_cpus         = 2
