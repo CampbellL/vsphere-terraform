@@ -23,7 +23,7 @@ data "vsphere_datastore" "mirrored_datastore" {
 }
 
 data "vsphere_resource_pool" "pool" {
-  name          = "Resources"
+  name          = "lancehead.campbell.lu/Resources"
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
