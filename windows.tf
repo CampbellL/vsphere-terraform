@@ -23,9 +23,7 @@ resource "vsphere_virtual_machine" "enshrouded_server" {
   }
 
   cdrom {
-    client_device = false
-    datastore_id  = data.vsphere_datastore.iso_datastore.id
-    path          = "OS/windows-x64/Server/Windows_Server_2025_EVAL_x64.iso "
+    client_device = true
   }
 
   wait_for_guest_ip_timeout  = 0
